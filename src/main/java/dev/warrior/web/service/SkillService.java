@@ -6,7 +6,6 @@ import dev.warrior.web.repository.SkillRepository;
 import org.apache.commons.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 @Service
 public class SkillService {

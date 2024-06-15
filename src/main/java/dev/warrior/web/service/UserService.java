@@ -1,6 +1,7 @@
 package dev.warrior.web.service;
 
 import dev.warrior.web.dto.UserDto;
+import dev.warrior.web.error.UserNotFoundException;
 import dev.warrior.web.model.Skill;
 import dev.warrior.web.model.User;
 import dev.warrior.web.repository.UserRepository;
@@ -26,6 +27,15 @@ public class UserService {
 
         user.setSkills(skills);
         return userRepository.save(user);
+    }
+
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream().map(UserDto::fromDomain).toList();
+    }
+
+    public UserDto getByUsername(String username) {
+        return UserDto.fromDomain(userRepository.findOneByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found")));
     }
 
 }

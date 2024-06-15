@@ -2,10 +2,12 @@ package dev.warrior.web.dto;
 
 import dev.warrior.web.model.Skill;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@NoArgsConstructor
 @Setter
 @ToString
 public class SkillDto {
