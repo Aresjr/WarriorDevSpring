@@ -38,4 +38,8 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User not found")));
     }
 
+    public UserDto getById(Long id) {
+        return UserDto.fromDomain(userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found")));
+    }
 }

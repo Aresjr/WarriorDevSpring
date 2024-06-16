@@ -16,27 +16,30 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/@{username}")
-    public ResponseEntity<UserDto> getUserByUsername(String username) {
-        try {
-            return ResponseEntity.ok(userService.getByUsername(username.toLowerCase()));
-        } catch (UserNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/api/users")
     public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-	@ResponseStatus(HttpStatus.OK)
 	@PostMapping("/api/user")
 	public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
 		return ResponseEntity.status(HttpStatus.OK)
                 .body(UserDto.fromDomain(userService.save(userDto)));
 	}
+
+    @PutMapping("/api/user/{id}")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(UserDto.fromDomain(userService.save(userDto)));
+    }
+
+    @GetMapping("/api/user/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(userService.getById(id));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 }
