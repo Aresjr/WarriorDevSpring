@@ -26,35 +26,19 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-9 col-lg-8 col-xl-5">
-              <h1 class="display-3 lh-sm">Landing Template for Startups</h1>
+              <h1 class="display-3 lh-sm">Lorem Ipsum</h1>
             </div>
             <div class="col-md-9 col-xl-5">
-              <p class="fs-2">Our landing page template works on all devices, and browsers, so you only have to set it up once, and get beautiful results forever.</p>
+              <p class="fs-2" data-th-text="${user.name}"></p>
+              <p data-th-each="skill : ${user.skills}">
+                <span data-th-text="${skill.name}"></span>
+              </p>
               <button class="btn btn-primary mt-3">Pricing and Plans</button>
             </div>
           </div>
         </div>
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
 
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
-      <section>
-
-        <div class="container"><img class="img-fluid" src="assets/img/gallery/dashboard.png" alt="Dashboard" />
-        </div>
-        <!-- end of .container-->
-
-      </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
       <section>
 
         <div class="container">
@@ -115,17 +99,9 @@
             </div>
           </div>
         </div>
-        <!-- end of .container-->
 
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
 
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
       <section class="mt-5">
 
         <div class="container">

@@ -2,10 +2,7 @@ package dev.warrior.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.warrior.web.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,6 +10,7 @@ import java.util.List;
 @Builder
 @Getter
 @NoArgsConstructor
+@ToString
 public class UserDto {
 
     private String name;
@@ -20,6 +18,7 @@ public class UserDto {
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ToString.Exclude
     private String password;
 
     private List<SkillDto> skills;
