@@ -7,7 +7,7 @@
     <title>Safia || Landing Template</title>
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.png">
     <link rel="stylesheet" crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==">
-    <link href="assets/css/theme.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -29,10 +29,20 @@
               <h1 class="display-3 lh-sm">Lorem Ipsum</h1>
             </div>
             <div class="col-md-9 col-xl-5">
-              <p class="fs-2" data-th-text="${user.name}"></p>
-              <p data-th-each="skill : ${user.skills}">
-                <span data-th-text="${skill.name}"></span>
-              </p>
+
+              <th:block th:if="${user}">
+                <p class="fs-2" data-th-text="${user.name}"></p>
+                <th:block th:if="${user.skills}">
+                  <p data-th-each="skill : ${user.skills}">
+                    <span data-th-text="${skill.name}"></span>
+                  </p>
+                </th:block>
+              </th:block>
+
+              <th:block th:unless="${user}">
+                <p class="fs-2">No user</p>
+              </th:block>
+
               <button class="btn btn-primary mt-3">Pricing and Plans</button>
             </div>
           </div>
@@ -117,15 +127,9 @@
             </div>
           </div>
         </div>
-        <!-- end of .container-->
 
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
 
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
       <section>
 
         <div class="container-lg">
@@ -181,17 +185,9 @@
             </div>
           </div>
         </div>
-        <!-- end of .container-->
 
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
 
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
       <section>
 
         <div class="container">
@@ -207,17 +203,9 @@
             </div>
           </div>
         </div>
-        <!-- end of .container-->
 
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
 
-
-
-
-      <!-- ============================================-->
-      <!-- <section> begin ============================-->
       <section class="bg-secondary">
 
         <div class="container">
@@ -233,32 +221,14 @@
             </div>
           </div>
         </div>
-        <!-- end of .container-->
 
       </section>
-      <!-- <section> close ============================-->
-      <!-- ============================================-->
-
 
     </main>
-    <!-- ===============================================-->
-    <!--    End of Main Content-->
-    <!-- ===============================================-->
 
-
-
-
-    <!-- ===============================================-->
-    <!--    JavaScripts-->
-    <!-- ===============================================-->
-    <script src="vendors/@popperjs/popper.min.js"></script>
-    <script src="vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="vendors/is/is.min.js"></script>
-    <script src="vendors/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-    <script src="assets/js/theme.js"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400&amp;display=swap" rel="stylesheet">
   </body>
 
