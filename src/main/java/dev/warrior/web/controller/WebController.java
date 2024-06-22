@@ -1,6 +1,6 @@
 package dev.warrior.web.controller;
 
-import dev.warrior.web.dto.UserDto;
+import dev.warrior.web.dto.input.UserInputDto;
 import dev.warrior.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,8 @@ public class WebController {
 
     @GetMapping("/@{username}")
     public ModelAndView getUserByUsername(@PathVariable String username) {
-        UserDto user = userService.getByUsername(username);
+        //UserInputDto user = userService.getByUsername(username);
+        UserInputDto user = null;
         ModelAndView mv = new ModelAndView("index");
 
         mv.addObject("user", user);

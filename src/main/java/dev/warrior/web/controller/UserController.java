@@ -1,6 +1,6 @@
 package dev.warrior.web.controller;
 
-import dev.warrior.web.dto.UserDto;
+import dev.warrior.web.dto.input.UserInputDto;
 import dev.warrior.web.error.UserNotFoundException;
 import dev.warrior.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +17,28 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/api/users")
-    public ResponseEntity<List<UserDto>> getUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<List<UserInputDto>> getUsers() {
+        return ResponseEntity.ok(null);
+        //return ResponseEntity.ok(userService.getAllUsers());
     }
 
 	@PostMapping("/api/user")
-	public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<UserInputDto> addUser(@RequestBody UserInputDto userInputDto) {
 		return ResponseEntity.status(HttpStatus.OK)
-                .body(UserDto.fromDomain(userService.save(userDto)));
+                .body(null);
 	}
 
     @PutMapping("/api/user/{id}")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserInputDto> updateUser(@RequestBody UserInputDto userInputDto) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(UserDto.fromDomain(userService.save(userDto)));
+                .body(null);
     }
 
     @GetMapping("/api/user/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UserInputDto> getUserById(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(userService.getById(id));
+            //return ResponseEntity.ok(userService.getById(id));
+            return ResponseEntity.ok(null);
         } catch (UserNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

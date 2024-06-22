@@ -24,12 +24,11 @@ public class User {
     @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
+    private String email;
+
     private String password;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_skill",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private List<Skill> skills;
-
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<UserSkill> skills;
 }

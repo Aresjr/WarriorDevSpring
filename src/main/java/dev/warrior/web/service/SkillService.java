@@ -1,11 +1,14 @@
 package dev.warrior.web.service;
 
-import dev.warrior.web.dto.SkillDto;
+import dev.warrior.web.dto.input.SkillInputDto;
 import dev.warrior.web.model.Skill;
 import dev.warrior.web.repository.SkillRepository;
 import org.apache.commons.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class SkillService {
@@ -13,10 +16,23 @@ public class SkillService {
     @Autowired
     private SkillRepository skillRepository;
 
-    public Skill upsert(SkillDto skillDto) {
-        skillDto.setName(WordUtils.capitalizeFully(skillDto.getName()));
-        return skillRepository.findOneByName(skillDto.getName())
-                .orElseGet(() -> skillRepository.save(skillDto.toModel()));
+    @Autowired
+    private SkillCategoryService skillCategoryService;
+
+    public Skill retrieveOrInsert(SkillInputDto skillInputDto) {
+        String skillName = WordUtils.capitalizeFully(skillInputDto.getName());
+        return Optional.ofNullable(getSkillByName(skillName))
+            .orElseGet(() -> {
+                Skill newSkill = new Skill(skillInputDto.getName());
+                newSkill.setSkillCategory(skillCategoryService.retrieveOrInsert(
+                    skillInputDto.getSkillCategory().getName()));
+                return skillRepository.save(newSkill);
+            });
+    }
+
+    @Cacheable(value = "skills", key = "#name", unless = "#result == null")
+    private Skill getSkillByName(String name) {
+        return skillRepository.findOneByName(name).orElse(null);
     }
 
 }

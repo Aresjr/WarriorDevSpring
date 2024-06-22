@@ -8,16 +8,18 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @Setter
-public class SkillCategory {
+@ToString
+public class UserSkillCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String name;
+    @ManyToOne
+    private User user;
 
-    public SkillCategory(String name) {
-        this.name = name;
-    }
+    @ManyToOne
+    private SkillCategory skillCategory;
 
+    private Long level;
 }

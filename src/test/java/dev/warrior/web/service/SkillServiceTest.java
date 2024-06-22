@@ -1,6 +1,7 @@
 package dev.warrior.web.service;
 
-import dev.warrior.web.dto.SkillDto;
+import dev.warrior.web.dto.input.SkillCategoryInputDto;
+import dev.warrior.web.dto.input.SkillInputDto;
 import dev.warrior.web.model.Skill;
 import dev.warrior.web.repository.SkillRepository;
 import org.junit.jupiter.api.Assertions;
@@ -20,24 +21,31 @@ public class SkillServiceTest {
     private SkillRepository skillRepository;
 
     @Test
-    void testUpsert() {
-        SkillDto skillDto = new SkillDto("Java");
-        Skill skill = skillService.upsert(skillDto);
+    void testRetrieveOrInsert() {
+        SkillCategoryInputDto coding = new SkillCategoryInputDto("Coding");
+
+        SkillInputDto skillInputDto = new SkillInputDto("Java", coding);
+        Skill skill = skillService.retrieveOrInsert(skillInputDto);
         Assertions.assertNotNull(skill);
 
         Long skillId = skill.getId();
         Assertions.assertNotNull(skillId);
         Assertions.assertEquals("Java", skill.getName());
+        Assertions.assertEquals(1, skillRepository.count());
+        Assertions.assertTrue(skillRepository.findOneByName("Java").isPresent());
 
-        SkillDto skillDto2 = new SkillDto("Java");
-        Skill skill2 = skillService.upsert(skillDto2);
+
+        SkillInputDto skillInputDto2 = new SkillInputDto("Java", coding);
+        Skill skill2 = skillService.retrieveOrInsert(skillInputDto2);
         Assertions.assertEquals(skillId, skill2.getId());
         Assertions.assertEquals("Java", skill2.getName());
+        Assertions.assertTrue(skillRepository.findOneByName("Java").isPresent());
 
-        SkillDto skillDto3 = new SkillDto("java");
-        Skill skill3 = skillService.upsert(skillDto2);
+        SkillInputDto skillInputDto3 = new SkillInputDto("java", coding);
+        Skill skill3 = skillService.retrieveOrInsert(skillInputDto3);
         Assertions.assertEquals(skillId, skill3.getId());
         Assertions.assertEquals("Java", skill3.getName());
+        Assertions.assertTrue(skillRepository.findOneByName("Java").isPresent());
     }
 
 }

@@ -1,14 +1,15 @@
 package dev.warrior.web.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@AllArgsConstructor
 @Entity
 @Getter
 @NoArgsConstructor
 @Setter
-public class SkillCategory {
+public class Xp {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -16,8 +17,7 @@ public class SkillCategory {
 
     private String name;
 
-    public SkillCategory(String name) {
-        this.name = name;
-    }
+    @OneToOne(optional = false)
+    private SkillCategory skillCategory;
 
 }
