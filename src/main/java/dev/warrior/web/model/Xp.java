@@ -19,5 +19,4 @@ public class Xp {
 
     @OneToOne(optional = false)
     private SkillCategory skillCategory;
-
 }

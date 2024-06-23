@@ -1,5 +1,6 @@
 package dev.warrior.web.model;
 
+import dev.warrior.web.dto.input.UserInputDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,4 +32,12 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserSkill> skills;
+
+    public static User of(UserInputDto userInputDto) {
+        return User.builder()
+                .name(userInputDto.getName())
+                .username(userInputDto.getUsername())
+                .email(userInputDto.getEmail())
+                .build();
+    }
 }

@@ -1,5 +1,6 @@
 package dev.warrior.web.dto.input;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @AllArgsConstructor
@@ -8,7 +9,8 @@ import lombok.*;
 @ToString
 public class SkillInputDto {
 
+    @NotBlank
     private String name;
 
-    private SkillCategoryInputDto skillCategory;
+    private Long skillCategoryId;
 }

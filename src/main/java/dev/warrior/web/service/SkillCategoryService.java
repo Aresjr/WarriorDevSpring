@@ -12,11 +12,10 @@ public class SkillCategoryService {
     @Autowired
     private SkillCategoryRepository skillCategoryRepository;
 
-    //TODO - capitalize before calling WordUtils.capitalizeFully
     @Cacheable("skillCategories")
-    public SkillCategory retrieveOrInsert(String skillCategoryName) {
-        return skillCategoryRepository.findOneByName(skillCategoryName)
-                .orElseGet(() -> skillCategoryRepository.save(new SkillCategory(skillCategoryName)));
+    public SkillCategory getSkillCategoryById(Long id) {
+        return skillCategoryRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Skill category not found"));
     }
 
 }

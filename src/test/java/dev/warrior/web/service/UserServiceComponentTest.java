@@ -8,17 +8,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @TestPropertySource(locations="classpath:application-test.properties")
-public class UserServiceTest {
+public class UserServiceComponentTest {
 
     @Autowired
     private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void setUp() {
@@ -38,7 +42,7 @@ public class UserServiceTest {
                 .orElseThrow(() -> new RuntimeException("User not found"));
         Assertions.assertEquals("Ares", userSaved.getName());
         Assertions.assertEquals("ares", userSaved.getUsername());
-        Assertions.assertEquals("password", userSaved.getPassword());
+        Assertions.assertTrue(passwordEncoder.matches("password", userSaved.getPassword()));
         Assertions.assertEquals(userId, userSaved.getId());
     }
 

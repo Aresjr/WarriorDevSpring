@@ -1,13 +1,11 @@
 package dev.warrior.web.service;
 
 import dev.warrior.web.dto.input.UserInputDto;
-import dev.warrior.web.error.UserNotFoundException;
 import dev.warrior.web.model.User;
 import dev.warrior.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserService {
@@ -15,8 +13,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public User save(UserInputDto userInputDto) {
-        User user = userInputDto.toDomain();
+        User user = User.of(userInputDto);
+        user.setPassword(passwordEncoder.encode(userInputDto.getPassword()));
         return userRepository.save(user);
     }
 

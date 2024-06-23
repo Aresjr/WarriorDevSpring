@@ -1,7 +1,6 @@
 package dev.warrior.web.dto.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.warrior.web.model.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -27,16 +26,11 @@ public class UserInputDto {
     @Size(min = 3, max = 20)
     private String username;
 
+    @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Size(min = 6, max = 50)
     @ToString.Exclude
     private String password;
 
     private List<SkillInputDto> skills;
-
-    private List<SkillCategoryInputDto> skillCategories;
-
-    public User toDomain() {
-        return User.builder().name(name).email(email).username(username).password(password).build();
-    }
-
 }

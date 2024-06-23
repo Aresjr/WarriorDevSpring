@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class WarriorConfig {
@@ -40,5 +46,12 @@ public class WarriorConfig {
         viewResolver.setTemplateEngine(templateEngine());
         viewResolver.setOrder(1);
         return viewResolver;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        Map<String, PasswordEncoder> encoders = new HashMap<>();
+        encoders.put("bcrypt", new BCryptPasswordEncoder());
+        return new DelegatingPasswordEncoder("bcrypt", encoders);
     }
 }

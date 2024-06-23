@@ -24,8 +24,8 @@ public class SkillService {
         return Optional.ofNullable(getSkillByName(skillName))
             .orElseGet(() -> {
                 Skill newSkill = new Skill(skillInputDto.getName());
-                newSkill.setSkillCategory(skillCategoryService.retrieveOrInsert(
-                    skillInputDto.getSkillCategory().getName()));
+                newSkill.setSkillCategory(skillCategoryService
+                        .getSkillCategoryById(skillInputDto.getSkillCategoryId()));
                 return skillRepository.save(newSkill);
             });
     }
